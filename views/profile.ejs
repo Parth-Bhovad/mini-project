@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/logout">Logout</a>
+    <h1>Hello, <%= user.name %> 👋</h1>
+    <h3>you can Create a new post </h3>
+    <form action="/post" method="post">
+        <textarea name="post" placeholder="What's in your mind?"></textarea>
+        <input type="submit" value="Create new post">
+    </form>
+
+    <div class="posts">
+    <h4>Your Posts.</h4>
+<div class="postContainer">
+    <div class="post">
+        <h4>@someuser</h4>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, nesciunt numquam odio velit in aliquid architecto ad, quidem dolor, obcaecati et officia repellat explicabo molestiae nemo eius possimus consequatur qui.</p>
+        <div>
+            <a href="">Like</a>
+            <a href="">Edit</a>
+        </div>
+    </div>
+</div>
+    </div>
+
+</body>
+</html>
