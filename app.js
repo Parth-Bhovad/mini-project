@@ -22,7 +22,6 @@ app.get('/login', (req, res) => {
 
 app.get('/profile', isLoggedIn, async (req, res) => {
    let user = await userModel.findOne({email:req.user.email}).populate("posts")
-   console.log(user);
     res.render("profile", {user});
 });
 
@@ -54,7 +53,7 @@ app.post('/register', async (req, res) => {
                 password: hash
             });
 
-            let token = jwt.sign({ email: req.body.email, userid: req.body._id }, "shhhh");
+            let token = jwt.sign({ email: req.body.email, userid: userCreated._id }, "shhhh");
             res.cookie("token", token);
             res.send("registered");
         })
