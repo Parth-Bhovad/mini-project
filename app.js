@@ -21,16 +21,22 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/profile', isLoggedIn, async (req, res) => {
-   let user = await userModel.findOne({email:req.user.email});
+   let user = await userModel.findOne({email:req.user.email}).populate("posts")
    console.log(user);
     res.render("profile", {user});
 });
 
-app.get('/post', isLoggedIn, async (req, res) => {
+app.post('/post', isLoggedIn, async (req, res) => {
     let user = await userModel.findOne({email:req.user.email});
-    console.log(user);
-     res.render("profile", {user});
- })
+   let post = await postModel.create({
+        user: user._id,
+        content:req.body.content,
+    });
+
+    user.posts.push(post._id);
+    await  user.save();
+    res.redirect('/profile');
+})
 
 app.post('/register', async (req, res) => {
     let user = await userModel.findOne({ email: req.body.email });
