@@ -21,9 +21,12 @@
         <div class="post">
             <h4>@<%= user.username %></h4>
             <p><%= post.content %></p>
+            <div><%= post.likes.length %> Likes</div>
             <div>
-                <a href="">Like</a>
-                <a href="">Edit</a>
+                <a href="/like/<%= post._id %>">
+                     <%= post.likes.indexOf(user._id) === -1 ? "like" : "unlike" %>
+                </a>
+                <a href="/edit/<%= post._id %>">Edit</a>
             </div>
         </div>
   <%  }) %>
