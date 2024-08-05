@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <a href="/logout">Logout</a>
     <h1>Hello, <%= user.name %> 👋</h1>
@@ -15,23 +17,29 @@
     </form>
 
     <div class="posts">
-    <h4>Your Posts.</h4>
-<div class="postContainer">
-    <% user.posts.reverse().forEach((post) => { %>
-        <div class="post">
-            <h4>@<%= user.username %></h4>
-            <p><%= post.content %></p>
-            <div><%= post.likes.length %> Likes</div>
-            <div>
-                <a href="/like/<%= post._id %>">
-                     <%= post.likes.indexOf(user._id) === -1 ? "like" : "unlike" %>
-                </a>
-                <a href="/edit/<%= post._id %>">Edit</a>
-            </div>
+        <h4>Your Posts.</h4>
+        <div class="postContainer">
+            <% user.posts.reverse().forEach((post)=> { %>
+                <div class="post">
+                    <h4>@<%= user.username %>
+                    </h4>
+                    <p>
+                        <%= post.content %>
+                    </p>
+                    <div>
+                        <%= post.likes.length %> Likes
+                    </div>
+                    <div>
+                        <a href="/like/<%= post._id %>">
+                            <%= post.likes.indexOf(user._id)===-1 ? "like" : "unlike" %>
+                        </a>
+                        <a href="/edit/<%= post._id %>">Edit</a>
+                    </div>
+                </div>
+                <% }) %>
         </div>
-  <%  }) %>
-</div>
     </div>
 
 </body>
+
 </html>

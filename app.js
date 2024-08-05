@@ -21,41 +21,41 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/profile', isLoggedIn, async (req, res) => {
-   let user = await userModel.findOne({email:req.user.email}).populate("posts")
-    res.render("profile", {user});
+    let user = await userModel.findOne({ email: req.user.email }).populate("posts")
+    res.render("profile", { user });
 });
 
 app.get('/like/:id', isLoggedIn, async (req, res) => {
-    let post = await postModel.findOne({_id:req.params.id});
+    let post = await postModel.findOne({ _id: req.params.id });
 
     if (post.likes.indexOf(req.user.userid) === -1) {
-    post.likes.push(req.user.userid);
-    }else{
+        post.likes.push(req.user.userid);
+    } else {
         post.likes.splice(post.likes.indexOf(req.user.userid), 1);
     }
-   await post.save();
-   res.redirect("/profile")
- });
+    await post.save();
+    res.redirect("/profile")
+});
 
- app.get('/edit/:id', isLoggedIn, async (req, res) => {
-    let post = await postModel.findOne({_id:req.params.id});
-  res.render('edit', {post});
- });
+app.get('/edit/:id', isLoggedIn, async (req, res) => {
+    let post = await postModel.findOne({ _id: req.params.id });
+    res.render('edit', { post });
+});
 
- app.post('/update/:id', isLoggedIn, async (req, res) => {
-    let post = await postModel.findOneAndUpdate({_id:req.params.id}, {content: req.body.content});
-  res.redirect('/profile');
- });
+app.post('/update/:id', isLoggedIn, async (req, res) => {
+    let post = await postModel.findOneAndUpdate({ _id: req.params.id }, { content: req.body.content });
+    res.redirect('/profile');
+});
 
 app.post('/post', isLoggedIn, async (req, res) => {
-    let user = await userModel.findOne({email:req.user.email});
-   let post = await postModel.create({
+    let user = await userModel.findOne({ email: req.user.email });
+    let post = await postModel.create({
         user: user._id,
-        content:req.body.content,
+        content: req.body.content,
     });
 
     user.posts.push(post._id);
-    await  user.save();
+    await user.save();
     res.redirect('/profile');
 })
 
@@ -92,7 +92,7 @@ app.post('/login', async (req, res) => {
 
     bcrypt.compare(req.body.password, user.password, (err, result) => {
         if (result) {
-            let token = jwt.sign({ email: req.body.email, userid: req.body._id }, "shhhh");
+            let token = jwt.sign({ email: req.body.email, userid: user._id }, "shhhh");
             res.cookie("token", token);
             res.status(200).redirect("/profile");
         } else {
