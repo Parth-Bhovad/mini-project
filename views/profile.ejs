@@ -9,7 +9,10 @@
 
 <body>
     <a href="/logout">Logout</a>
-    <h1>Hello, <%= user.name %> 👋</h1>
+    <div>
+        <div class="profilePhoto"> <img src="/images/uploads/<%= user.profilepic %>" alt=""></div>
+        <h1>Hello, <%= user.name %> 👋</h1>
+    </div>
     <h3>you can Create a new post </h3>
     <form action="/post" method="post">
         <textarea name="content" placeholder="What's in your mind?"></textarea>
