@@ -5,10 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "install": "npm install",
     "build": "npm install",
-    "deploy": "npm start"
+    "start": "npm start"
   },
   "keywords": [],
   "author": "",
