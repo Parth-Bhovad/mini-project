@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "install": "npm install",
-    "build": "npm run build",
-    "deploy": "npm run install && npm run start"
+    "build": "npm install",
+    "deploy": "npm start"
   },
   "keywords": [],
   "author": "",
